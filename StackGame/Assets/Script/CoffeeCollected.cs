@@ -20,9 +20,9 @@ public class CollectedCoffee : MonoBehaviour
             seq = DOTween.Sequence();
             for (int i =  CollectedCoffeeData.Instance.CoffeeList.Count - 1; i > 0; i--)
             {
-                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(1.5f, 0.2f));
-                seq.AppendInterval(0.05f);
                 seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(1f, 0.2f));
+                seq.AppendInterval(0.05f);
+                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.7f, 0.2f));
             }
         }
 

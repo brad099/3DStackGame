@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Skate
   - Skated
+  - Enemy
+  - Change
   layers:
   - Default
   - TransparentFX
