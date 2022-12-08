@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         // Horizontal = Input.GetAxis("Horizontal");
         float movement = (_speed * Input.GetAxis("Horizontal")) * Time.deltaTime;
             _transform.Translate(1 * movement,0, Time.deltaTime * _speed);
-            _transform.localPosition = new Vector3((Mathf.Clamp(transform.localPosition.x, -4.43f, 4.43f)),transform.localPosition.y, transform.localPosition.z);
+            _transform.localPosition = new Vector3((Mathf.Clamp(transform.localPosition.x, -4.0f, 4.0f)),transform.localPosition.y, transform.localPosition.z);
         
          if(CollectedCoffeeData.Instance.CoffeeList.Count > 1)
             CoffeeFollow();
@@ -43,9 +43,9 @@ public class PlayerController : MonoBehaviour
             seq = DOTween.Sequence();
             for (int i =  CollectedCoffeeData.Instance.CoffeeList.Count - 1; i > 0; i--)
             {
-                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(1.5f, 0.2f));
-                seq.AppendInterval(0.05f);
                 seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(1f, 0.2f));
+                seq.AppendInterval(0.05f);
+                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.7f, 0.2f));
             }
         }
     }
