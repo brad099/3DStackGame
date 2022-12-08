@@ -5,9 +5,9 @@ using DG.Tweening;
 
 public class CollectedCoffee : MonoBehaviour
 {
-
     public PlayerController Parent;
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other) 
+    {
         if(other.CompareTag("Skate"))
         {
             other.tag = "Skated";
