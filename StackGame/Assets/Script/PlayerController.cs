@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
             CoffeeFollow();
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other) 
+    {
         if(other.CompareTag("Skate"))
         {
             CollectedCoffeeData.Instance.CoffeeList.Add(other.transform);
@@ -47,6 +48,11 @@ public class PlayerController : MonoBehaviour
                 seq.AppendInterval(0.05f);
                 seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.7f, 0.2f));
             }
+        }
+
+        if (other.CompareTag("Finish"))
+        {
+           _speed = 0;
         }
     }
 

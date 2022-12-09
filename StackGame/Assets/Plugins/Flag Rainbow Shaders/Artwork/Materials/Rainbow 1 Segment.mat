@@ -45,11 +45,12 @@ Material:
     - _Animate: 1
     - _AnimateGlow: 1
     - _AnimateRotation: 1
+    - _Animate_Rotation: 1
     - _Breath: 1
     - _Clockwise: 1
     - _Float: 2
     - _Glow: 2.88
-    - _Phase: 0
+    - _Phase: 1
     - _Segments: 0
     - _Speed: 0.1
     m_Colors:
