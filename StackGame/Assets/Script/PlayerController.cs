@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private float _speed = 10f;
     [SerializeField] private float LerpSpeed = 10f;
     [SerializeField] private float OffSet = 2f;
-    private float Horizontal;
     private Transform _transform;
 
     
@@ -22,10 +21,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Horizontal = Input.GetAxis("Horizontal");
+        //Move With Clamp
         float movement = (_speed * Input.GetAxis("Horizontal")) * Time.deltaTime;
             _transform.Translate(1 * movement,0, Time.deltaTime * _speed);
-            _transform.localPosition = new Vector3((Mathf.Clamp(transform.localPosition.x, -4.0f, 4.0f)),transform.localPosition.y, transform.localPosition.z);
+            _transform.localPosition = new Vector3((Mathf.Clamp(transform.localPosition.x, -3, 3f)),transform.localPosition.y, transform.localPosition.z);
         
          if(CollectedCoffeeData.Instance.CoffeeList.Count > 1)
             CoffeeFollow();
@@ -33,12 +32,18 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) 
     {
+        // Collecting Skates
         if(other.CompareTag("Skate"))
         {
+
+            // Adding to List
             CollectedCoffeeData.Instance.CoffeeList.Add(other.transform);
-            other.tag = "Skated";
             other.gameObject.AddComponent<CollectedCoffee>();
-            other.gameObject.AddComponent<Rigidbody>().isKinematic = true;
+            other.tag = "Skated";
+            other.gameObject.AddComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+
+            // Seq for Doing Bounce
             var seq = DOTween.Sequence();
             seq.Kill();
             seq = DOTween.Sequence();
@@ -50,6 +55,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+
+        // Finish Line
         if (other.CompareTag("Finish"))
         {
            _speed = 0;
@@ -63,7 +70,7 @@ public class PlayerController : MonoBehaviour
         {
         Vector3 PrevPos = CollectedCoffeeData.Instance.CoffeeList[i-1].position + Vector3.forward*OffSet;
         Vector3 CurrentPos = CollectedCoffeeData.Instance.CoffeeList[i].transform.position;
-        CollectedCoffeeData.Instance.CoffeeList[i].transform.position = Vector3.Lerp(CurrentPos, PrevPos, LerpSpeed * Time.deltaTime);   
+        //CollectedCoffeeData.Instance.CoffeeList[i].transform.position = Vector3.Lerp(CurrentPos, PrevPos, LerpSpeed * Time.deltaTime);   
         }
     }
 }
