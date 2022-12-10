@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         // Finish Line
         if (other.CompareTag("Finish"))
         {

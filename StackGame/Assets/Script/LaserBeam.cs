@@ -15,7 +15,6 @@ public class LaserBeam : MonoBehaviour
     public float MainTextureLength = 1f;
     public float NoiseTextureLength = 1f;
     private Vector4 Length = new Vector4(1,1,1,1);
-    private bool LaserSaver = false;
     private bool UpdateSaver = false;
     [SerializeField] Transform FirePoint;
     private ParticleSystem[] Effects;
