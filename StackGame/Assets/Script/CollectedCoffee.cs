@@ -47,14 +47,14 @@ public class CollectedCoffee : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Debug.Log("Time to Die");
-            int index = CollectedCoffeeData.Instance.CoffeeList.FindIndex(x => x.transform == transform);
-            List<Transform> transforms = CollectedCoffeeData.Instance.CoffeeList.GetRange(index, CollectedCoffeeData.Instance.CoffeeListCount - index);
-            foreach (Transform item in CollectedCoffeeData.Instance.CoffeeList)
-            {
-                item.tag = "Collectable";
-                CollectedCoffeeData.Instance.CoffeeList.Remove(item);
-                item.position += new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
-            }
+            // int index = CollectedCoffeeData.Instance.CoffeeList.FindIndex(x => x.transform == transform);
+            // List<Transform> transforms = CollectedCoffeeData.Instance.CoffeeList.GetRange(index, CollectedCoffeeData.Instance.CoffeeListCount - index);
+            // foreach (Transform item in CollectedCoffeeData.Instance.CoffeeList)
+            // {
+            //     item.tag = "Collectable";
+            //     CollectedCoffeeData.Instance.CoffeeList.Remove(item);
+            //     item.position += new Vector3(Random.Range(-2, 2), 0, Random.Range(-2, 2));
+            // }
 
             //   transform.DOLocalJump(new Vector3(transform.position.x, transform.position.y, transform.position.z) * Random.Range(1, 2f)
             // , 1, 1, 1);
