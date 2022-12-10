@@ -8,6 +8,7 @@ TagManager:
   - Skated
   - Enemy
   - Change
+  - Collectable
   layers:
   - Default
   - TransparentFX

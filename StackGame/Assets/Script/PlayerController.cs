@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         //Move With Clamp
         float movement = (_speed * Input.GetAxis("Horizontal")) * Time.deltaTime;
             _transform.Translate(1 * movement,0, Time.deltaTime * _speed);
-            _transform.localPosition = new Vector3((Mathf.Clamp(transform.localPosition.x, -3, 3f)),transform.localPosition.y, transform.localPosition.z);
+            _transform.localPosition = new Vector3((Mathf.Clamp(transform.localPosition.x, -3, 2.3f)),transform.localPosition.y, transform.localPosition.z);
         
          if(CollectedCoffeeData.Instance.CoffeeList.Count > 1)
             CoffeeFollow();
@@ -69,8 +69,9 @@ public class PlayerController : MonoBehaviour
         for (int i = 1; i < CollectedCoffeeData.Instance.CoffeeList.Count; i++)
         {
         Vector3 PrevPos = CollectedCoffeeData.Instance.CoffeeList[i-1].position + Vector3.forward*OffSet;
+        PrevPos.y = CollectedCoffeeData.Instance.CoffeeList[i].position.y;
         Vector3 CurrentPos = CollectedCoffeeData.Instance.CoffeeList[i].transform.position;
-        //CollectedCoffeeData.Instance.CoffeeList[i].transform.position = Vector3.Lerp(CurrentPos, PrevPos, LerpSpeed * Time.deltaTime);   
+        CollectedCoffeeData.Instance.CoffeeList[i].transform.position = Vector3.Lerp(CurrentPos, PrevPos, LerpSpeed * Time.deltaTime);   
         }
     }
 }
