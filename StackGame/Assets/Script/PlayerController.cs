@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,12 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float LerpSpeed = 10f;
     [SerializeField] private float OffSet = 2f;
     private Transform _transform;
-
-    
+    private Rigidbody _physics;
+    EventHolder _eventHolder;
 
     void Start()
     {
         _transform = GetComponent<Transform>();
+        _physics= gameObject.GetComponent<Rigidbody>();
+        _eventHolder = GetComponent<EventHolder>();
         CollectedCoffeeData.Instance.CoffeeList.Add(transform.GetChild(0));
     }
 
@@ -25,7 +29,6 @@ public class PlayerController : MonoBehaviour
         float movement = (_speed * Input.GetAxis("Horizontal")) * Time.deltaTime;
             _transform.Translate(1 * movement,0, Time.deltaTime * _speed);
             _transform.localPosition = new Vector3((Mathf.Clamp(transform.localPosition.x, -3, 2.3f)),transform.localPosition.y, transform.localPosition.z);
-        
          if(CollectedCoffeeData.Instance.CoffeeList.Count > 1)
             CoffeeFollow();
     }
@@ -49,19 +52,24 @@ public class PlayerController : MonoBehaviour
             seq = DOTween.Sequence();
             for (int i =  CollectedCoffeeData.Instance.CoffeeList.Count - 1; i > 0; i--)
             {
-                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(1f, 0.2f));
+                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.6f, 0.2f));
                 seq.AppendInterval(0.05f);
-                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.7f, 0.2f));
+                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.5f, 0.2f));
             }
         }
 
-        // Finish Line
+        //// Finish Line
         if (other.CompareTag("Finish"))
         {
-           _speed = 0;
+            _speed = 0;
+            _eventHolder.FinishArrivedEvent();
         }
     }
 
+    public void SetSpeedZero()
+    {
+        _speed = 0;
+    }
     public void CoffeeFollow()
     {
         // Checking List for Distance

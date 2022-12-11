@@ -1,72 +1,113 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 public class CollectedCoffee : MonoBehaviour
 {
+    [SerializeField] GameObject Simple;
+    [SerializeField] GameObject Spray;
+    [SerializeField] GameObject Graffiti;
+    [SerializeField] GameObject Neon;
+    [SerializeField] GameObject Fly;
     public PlayerController Parent;
-    [SerializeField] GameObject Change;
     private Rigidbody rb;
-
+    EventHolder _eventHolder;
+    Finish _finish;
     private void Start()
     {
-        Change = this.gameObject.transform.GetChild(0).gameObject;
+        Simple = this.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject;
+        Spray = this.gameObject.transform.GetChild(0).transform.GetChild(1).gameObject;
+        Graffiti = this.gameObject.transform.GetChild(0).transform.GetChild(2).gameObject;
+        Neon = this.gameObject.transform.GetChild(0).transform.GetChild(3).gameObject;
+        Fly = this.gameObject.transform.GetChild(0).transform.GetChild(4).gameObject;
         rb = GetComponent<Rigidbody>();
+        _eventHolder = FindObjectOfType<EventHolder>();
+        _eventHolder.OnFinishArrived += StartAnimation;
+        _finish = FindObjectOfType<Finish>();
+    }
+
+    private void StartAnimation()
+    {
+        if (!transform.CompareTag("Player"))
+        {
+            _finish.SkatePlacement(gameObject.transform);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         //Collect Skates
-        if (other.CompareTag("Skate"))
+        if (other.transform.CompareTag("Skate"))
         {
-            other.tag = "Skated";
+            other.transform.tag = "Skated";
             CollectedCoffeeData.Instance.CoffeeList.Add(other.transform);
             other.gameObject.AddComponent<CollectedCoffee>();
             other.gameObject.AddComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
-
+            other.gameObject.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             var seq = DOTween.Sequence();
             seq.Kill();
             seq = DOTween.Sequence();
             for (int i = CollectedCoffeeData.Instance.CoffeeList.Count - 1; i > 0; i--)
             {
-                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(1f, 0.2f));
+                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.6f, 0.2f));
                 seq.AppendInterval(0.05f);
-                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.7f, 0.2f));
+                seq.Join(CollectedCoffeeData.Instance.CoffeeList[i].DOScale(0.5f, 0.2f));
             }
         }
-        //Change to Neon
-        if (other.CompareTag("Change"))
+        //Change to Spray
+        if (other.transform.CompareTag("Spray"))
         {
-            Change.gameObject.SetActive(true);
+            Simple.gameObject.SetActive(false);
+            Spray.gameObject.SetActive(true);
+            Graffiti.gameObject.SetActive(false);
+            Neon.gameObject.SetActive(false);
+            Fly.gameObject.SetActive(false);
         }
 
+        //Change to Graffiti
+        if (other.transform.CompareTag("Graffiti"))
+        {
+            Simple.gameObject.SetActive(false);
+            Spray.gameObject.SetActive(false);
+            Graffiti.gameObject.SetActive(true);
+            Neon.gameObject.SetActive(false);
+            Fly.gameObject.SetActive(false);
+        }
 
+        //Change to Neon
+        if (other.transform.CompareTag("Neon"))
+        {
+            Simple.gameObject.SetActive(false);
+            Spray.gameObject.SetActive(false);
+            Graffiti.gameObject.SetActive(false);
+            Neon.gameObject.SetActive(true);
+            Fly.gameObject.SetActive(false);
+        }
+
+        //Change to Fly
+        if (other.transform.CompareTag("Fly"))
+        {
+            Simple.gameObject.SetActive(false);
+            Spray.gameObject.SetActive(false);
+            Graffiti.gameObject.SetActive(false);
+            Neon.gameObject.SetActive(false);
+            Fly.gameObject.SetActive(true);
+        }        
         //Ememy Line
-        if (other.CompareTag("Enemy"))
+        if (other.transform.CompareTag("Enemy"))
         {
             RemoveFromList(gameObject);
         }
 
-
-
         //Finish
-        if (other.CompareTag("Finish"))
+        if (other.transform.CompareTag("Finish"))
         {
             Debug.Log("Ending");
         }
-        //     foreach (GameObject drops in CollectedItems)
-        // {
-        //     distance = new Vector3 (Random.Range(-1, 3), 0.5f, Random.Range(-1, 3));
-        //     drops.transform.parent = null;
-        //     var seq = DOTween.Sequence();
-        //     drops.AddComponent<Rigidbody>();
-        //     seq.Append(drops.transform.DOLocalJump((gameObject.transform.position + distance), 1.3f, 1, 0.5f)).Join(drops.transform.DOScale(1f, 0.2f));
-        //      CollectedCoffeeData.Instance.CoffeeList.Remove[transform];
-        // } 
     }
-
-
 
     ///Tural'S Pack\\\
     private void RemoveFromList(GameObject skate)

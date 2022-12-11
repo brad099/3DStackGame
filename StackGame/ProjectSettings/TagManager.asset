@@ -9,6 +9,13 @@ TagManager:
   - Enemy
   - Change
   - Collectable
+  - SkatesList
+  - Ground
+  - Simple
+  - Spray
+  - Graffiti
+  - Neon
+  - Fly
   layers:
   - Default
   - TransparentFX
