@@ -16,6 +16,8 @@ TagManager:
   - Graffiti
   - Neon
   - Fly
+  - Collected
+  - Obstacle
   layers:
   - Default
   - TransparentFX
