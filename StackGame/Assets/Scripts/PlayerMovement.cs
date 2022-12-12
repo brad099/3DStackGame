@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject Graffiti;
     [SerializeField] GameObject Neon;
     [SerializeField] GameObject Fly;
+    [SerializeField] Animator _anim;
 
 
     private Vector3 _direction;
@@ -17,13 +18,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        _anim = transform.GetComponentInChildren<Animator>();
         _transform = transform;
         SkateHolder.Instance.skateList.Add(transform.GetChild(0));
-        Simple = this.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject;
-        Spray = this.gameObject.transform.GetChild(0).transform.GetChild(1).gameObject;
-        Graffiti = this.gameObject.transform.GetChild(0).transform.GetChild(2).gameObject;
-        Neon = this.gameObject.transform.GetChild(0).transform.GetChild(3).gameObject;
-        Fly = this.gameObject.transform.GetChild(0).transform.GetChild(4).gameObject;
+        Simple = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject;
+        Spray = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).gameObject;
+        Graffiti = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(2).gameObject;
+        Neon = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(3).gameObject;
+        Fly = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(4).gameObject;
     }
 
     void FixedUpdate()
@@ -35,9 +37,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _direction = new Vector3(Input.GetAxis("Horizontal") * speedMultiplier, 0, verticalSpeed) * Time.fixedDeltaTime;
         _transform.Translate(_direction.x, 0, _direction.z);
-
+        _anim.SetFloat ("TurnFloat",Input.GetAxis("Horizontal"));
         var localPosition = _transform.localPosition;
-        localPosition = new Vector3(Mathf.Clamp(localPosition.x, -4.5f, 4.5f), localPosition.y, localPosition.z);
+        localPosition = new Vector3(Mathf.Clamp(localPosition.x, -3f, 3f), localPosition.y, localPosition.z);
         _transform.localPosition = localPosition;
     }
 

@@ -31,13 +31,13 @@ public class FinishHandler : MonoBehaviour
             if (_placeCount == 4)
             {
                 skate.parent = skatePlaces[_placeCount];
-                //skate.DORotate(new Vector3(90, 0, 0), 0.25f).SetLoops(4, LoopType.Incremental);
+                skate.DOLocalRotate(new Vector3(90, 0, 0), 0.25f).SetLoops(4, LoopType.Incremental);
                 skate.DOLocalJump(Vector3.zero, 0.05f, 1, .5f);
             }
             else
             {
                 skate.parent = skatePlaces[_placeCount];
-                //skate.DORotate(new Vector3(90, 0, 0), 0.25f).SetLoops(4, LoopType.Incremental);
+                skate.DOLocalRotate(new Vector3(0, 0, 0), 0.3f);
                 skate.DOLocalJump(Vector3.zero, 0.05f, 1, .5f);
                 _placeCount++;
             }

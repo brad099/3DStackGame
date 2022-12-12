@@ -2,16 +2,17 @@ using UnityEngine;
 using DG.Tweening;
 public class CollectedSkate : MonoBehaviour
 {
-
         [SerializeField] GameObject Simple;
         [SerializeField] GameObject Spray;  
         [SerializeField] GameObject Graffiti;
         [SerializeField] GameObject Neon;
         [SerializeField] GameObject Fly;
         private Sequence _sequence;
+
         
         void Start()
         {
+
         Simple = this.gameObject.transform.transform.GetChild(0).gameObject;
         Spray = this.gameObject.transform.transform.GetChild(1).gameObject;
         Graffiti = this.gameObject.transform.transform.GetChild(2).gameObject;
@@ -20,12 +21,12 @@ public class CollectedSkate : MonoBehaviour
         }
     void OnCollisionEnter(Collision other)
     {
-
         if (other.transform.CompareTag("Collectable"))
         {
             EventHolder.Instance.SkateCollided(other.transform);
         } 
     }
+
 
     private void OnTriggerEnter(Collider other) 
     {
@@ -33,7 +34,8 @@ public class CollectedSkate : MonoBehaviour
         {
             EventHolder.Instance.ObstacleCollided(transform);
             Debug.Log("Colliding To Enemy");
-        }
+        }     
+
 
         //Change to Spray
         if (other.transform.CompareTag("Spray"))

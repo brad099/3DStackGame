@@ -18,6 +18,7 @@ TagManager:
   - Fly
   - Collected
   - Obstacle
+  - Roll
   layers:
   - Default
   - TransparentFX
