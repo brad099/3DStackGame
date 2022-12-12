@@ -47,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _isMoving = false;
             EventHolder.Instance.FinishCollider();
-            
-
         }
         //Change to Spray
         if (other.transform.CompareTag("Spray"))
