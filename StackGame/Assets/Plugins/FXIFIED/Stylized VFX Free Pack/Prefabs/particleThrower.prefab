@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7025019999686932508}
   - component: {fileID: 7025019999686932499}
   m_Layer: 0
-  m_Name: FX_Flamethrower_AB
+  m_Name: particleThrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
