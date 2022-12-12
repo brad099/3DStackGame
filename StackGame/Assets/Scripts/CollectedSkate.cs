@@ -9,10 +9,8 @@ public class CollectedSkate : MonoBehaviour
         [SerializeField] GameObject Fly;
         private Sequence _sequence;
 
-        
         void Start()
         {
-
         Simple = this.gameObject.transform.transform.GetChild(0).gameObject;
         Spray = this.gameObject.transform.transform.GetChild(1).gameObject;
         Graffiti = this.gameObject.transform.transform.GetChild(2).gameObject;
@@ -27,15 +25,13 @@ public class CollectedSkate : MonoBehaviour
         } 
     }
 
-
     private void OnTriggerEnter(Collider other) 
     {
          if (other.CompareTag("Obstacle"))
         {
             EventHolder.Instance.ObstacleCollided(transform);
             Debug.Log("Colliding To Enemy");
-        }     
-
+        }
 
         //Change to Spray
         if (other.transform.CompareTag("Spray"))
