@@ -24,7 +24,7 @@ public class ObstacleHandler : MonoBehaviour
                 Destroy(droppedSkate.GetComponent<Rigidbody>());
                 Destroy(droppedSkate.GetComponent<CollectedSkate>());
                 Vector3 currentPos = droppedSkate.transform.position;
-                droppedSkate.transform.DOJump(new Vector3(currentPos.x + Random.Range(-1.5f, 1.5f), 0.2621811f, currentPos.z + Random.Range(3, 8)), 2f, 1, 0.5f);
+                droppedSkate.transform.DOJump(new Vector3(currentPos.x + Random.Range(-1.5f, 1.5f), 0.1f, currentPos.z + Random.Range(3, 5)), 2f, 1, 0.5f);
             }
         }
     }
