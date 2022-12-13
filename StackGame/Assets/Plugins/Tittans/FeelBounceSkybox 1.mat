@@ -66,12 +66,12 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Intensity: 1.7
+    - _Intensity: 1.4
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Saturation: 1.07
+    - _Saturation: 1.1
     - _ScreenSpace: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -79,8 +79,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _BottomColor: {r: 0.01027944, g: 0.5931805, b: 0.7264151, a: 0}
+    - _BottomColor: {r: 0.4481132, g: 0.9279528, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TopColor: {r: 0.3962264, g: 0.23736204, b: 0.3915539, a: 0}
+    - _TopColor: {r: 0.5596298, g: 0.73394597, b: 0.9056604, a: 1}
   m_BuildTextureStacks: []

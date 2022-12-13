@@ -19,6 +19,7 @@ TagManager:
   - Collected
   - Obstacle
   - Roll
+  - Cyber
   layers:
   - Default
   - TransparentFX

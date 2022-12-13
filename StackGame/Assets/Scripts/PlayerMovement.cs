@@ -21,11 +21,11 @@ public class PlayerMovement : MonoBehaviour
         _anim = transform.GetComponentInChildren<Animator>();
         _transform = transform;
         SkateHolder.Instance.skateList.Add(transform.GetChild(0));
-        Simple = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).gameObject;
-        Spray = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(1).gameObject;
-        Graffiti = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(2).gameObject;
-        Neon = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(3).gameObject;
-        Fly = this.gameObject.transform.GetChild(0).transform.GetChild(0).transform.GetChild(4).gameObject;
+        Simple = this.gameObject.transform.GetChild(0).transform.GetChild(0).gameObject;
+        Spray = this.gameObject.transform.GetChild(0).transform.GetChild(1).gameObject;
+        Graffiti = this.gameObject.transform.GetChild(0).transform.GetChild(2).gameObject;
+        Neon = this.gameObject.transform.GetChild(0).transform.GetChild(3).gameObject;
+        Fly = this.gameObject.transform.GetChild(0).transform.GetChild(4).gameObject;
     }
 
     void FixedUpdate()
