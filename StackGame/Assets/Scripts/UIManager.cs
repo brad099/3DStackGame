@@ -71,8 +71,6 @@ public class UIManager : MonoBehaviour
         FlyingCoins();
 
         // Getting Values on the Beginning
-        GoldAmount = PlayerPrefs.GetInt("gold");
-        Gold_Amount.text = "" + PlayerPrefs.GetInt("gold");
         GemAmount = PlayerPrefs.GetInt("gem");
         Gem_Amount.text  = "" + PlayerPrefs.GetInt("gem");
     }

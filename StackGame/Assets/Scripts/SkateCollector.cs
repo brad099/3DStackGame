@@ -6,6 +6,8 @@ public class SkateCollector : MonoBehaviour
     [SerializeField] private float lerpDuration;
     [SerializeField] private float stackOffset;
     private Sequence _sequence;
+
+    public bool IsFinished = true;
     void OnEnable()
     {
         EventHolder.Instance.OnSkateCollided += CollectSkate;
@@ -13,7 +15,8 @@ public class SkateCollector : MonoBehaviour
 
     private void FixedUpdate()
     {
-        StackFollow();
+        if(IsFinished)
+            StackFollow();
     }
 
     private void CollectSkate(Transform skate)

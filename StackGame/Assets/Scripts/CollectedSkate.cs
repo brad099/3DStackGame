@@ -3,6 +3,7 @@ using DG.Tweening;
 public class CollectedSkate : MonoBehaviour
 {
         [SerializeField] GameObject Simple;
+        [SerializeField] Animator _anim;
         [SerializeField] GameObject Spray;  
         [SerializeField] GameObject Graffiti;
         [SerializeField] GameObject Neon;
@@ -11,6 +12,7 @@ public class CollectedSkate : MonoBehaviour
 
         void Start()
         {
+        _anim = transform.GetComponent<Animator>();
         Simple = this.gameObject.transform.transform.GetChild(0).gameObject;
         Spray = this.gameObject.transform.transform.GetChild(1).gameObject;
         Graffiti = this.gameObject.transform.transform.GetChild(2).gameObject;
@@ -21,9 +23,12 @@ public class CollectedSkate : MonoBehaviour
 
         void Update()
         {
-            Quaternion rot = transform.localRotation;
-            transform.localRotation = rot;
-            rot.y = Mathf.Clamp(transform.eulerAngles.y, -10, 10);
+            _anim.SetFloat ("TurnFloat",Input.GetAxis("Horizontal"));
+            Mathf.Clamp(transform.rotation.z,-25,25);
+
+            // Quaternion rot = transform.localRotation;
+            // transform.localRotation = rot;
+            // rot.y = Mathf.Clamp(transform.eulerAngles.y, -10, 10);
         }
     void OnCollisionEnter(Collision other)
     {

@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (_isMoving) Movement();
+        Mathf.Clamp(transform.rotation.z,-15,15);
     }
 
     private void Movement()
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
             Graffiti.gameObject.SetActive(false);
             Neon.gameObject.SetActive(false);
             Fly.gameObject.SetActive(false);
+            _sequence = DOTween.Sequence();
             _sequence.Join(transform.DOScale(1.3f, 0.1f));
             _sequence.AppendInterval(0.05f);
             _sequence.Join(transform.DOScale(1f, 0.1f));
@@ -76,6 +78,10 @@ public class PlayerMovement : MonoBehaviour
             Graffiti.gameObject.SetActive(true);
             Neon.gameObject.SetActive(false);
             Fly.gameObject.SetActive(false);
+            _sequence = DOTween.Sequence();
+            _sequence.Join(transform.DOScale(1.3f, 0.1f));
+            _sequence.AppendInterval(0.05f);
+            _sequence.Join(transform.DOScale(1f, 0.1f));
         }
 
         //Change to Neon
@@ -86,6 +92,10 @@ public class PlayerMovement : MonoBehaviour
             Graffiti.gameObject.SetActive(false);
             Neon.gameObject.SetActive(true);
             Fly.gameObject.SetActive(false);
+            _sequence = DOTween.Sequence();
+            _sequence.Join(transform.DOScale(1.3f, 0.1f));
+            _sequence.AppendInterval(0.05f);
+            _sequence.Join(transform.DOScale(1f, 0.1f));
         }
 
         //Change to Fly
@@ -96,6 +106,10 @@ public class PlayerMovement : MonoBehaviour
             Graffiti.gameObject.SetActive(false);
             Neon.gameObject.SetActive(false);
             Fly.gameObject.SetActive(true);
+            _sequence = DOTween.Sequence();
+            _sequence.Join(transform.DOScale(1.3f, 0.1f));
+            _sequence.AppendInterval(0.05f);
+            _sequence.Join(transform.DOScale(1f, 0.1f));
         }
     }
 
