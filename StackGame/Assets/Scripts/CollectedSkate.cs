@@ -17,6 +17,14 @@ public class CollectedSkate : MonoBehaviour
         Neon = this.gameObject.transform.transform.GetChild(3).gameObject;
         Fly = this.gameObject.transform.transform.GetChild(4).gameObject;
         }
+
+
+        void Update()
+        {
+            Quaternion rot = transform.localRotation;
+            transform.localRotation = rot;
+            rot.y = Mathf.Clamp(transform.eulerAngles.y, -10, 10);
+        }
     void OnCollisionEnter(Collision other)
     {
         if (other.transform.CompareTag("Collectable"))

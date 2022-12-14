@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using DG.Tweening;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float verticalSpeed;
@@ -10,14 +10,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject Neon;
     [SerializeField] GameObject Fly;
     [SerializeField] Animator _anim;
+    private Rigidbody _rb;
 
-
+    private Sequence _sequence;
     private Vector3 _direction;
     private Transform _transform;
     private bool _isMoving = true;
 
     void Start()
     {
+        _rb = GetComponent<Rigidbody>();
         _anim = transform.GetComponentInChildren<Animator>();
         _transform = transform;
         SkateHolder.Instance.skateList.Add(transform.GetChild(0));
@@ -40,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
         _anim.SetFloat ("TurnFloat",Input.GetAxis("Horizontal"));
         var localPosition = _transform.localPosition;
         localPosition = new Vector3(Mathf.Clamp(localPosition.x, -3f, 3f), localPosition.y, localPosition.z);
+        Quaternion rot = transform.localRotation;
+        transform.localRotation = rot;
+        rot.y = Mathf.Clamp(transform.eulerAngles.y, -10, 10);
         _transform.localPosition = localPosition;
     }
 
@@ -58,6 +63,9 @@ public class PlayerMovement : MonoBehaviour
             Graffiti.gameObject.SetActive(false);
             Neon.gameObject.SetActive(false);
             Fly.gameObject.SetActive(false);
+            _sequence.Join(transform.DOScale(1.3f, 0.1f));
+            _sequence.AppendInterval(0.05f);
+            _sequence.Join(transform.DOScale(1f, 0.1f));
         }
 
         //Change to Graffiti
