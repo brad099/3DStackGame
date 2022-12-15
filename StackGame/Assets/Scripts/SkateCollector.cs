@@ -6,7 +6,6 @@ public class SkateCollector : MonoBehaviour
     [SerializeField] private float lerpDuration;
     [SerializeField] private float stackOffset;
     private Sequence _sequence;
-
     public bool IsFinished = true;
     void OnEnable()
     {
@@ -24,8 +23,6 @@ public class SkateCollector : MonoBehaviour
         skate.tag = "Collected";
         SkateHolder.Instance.skateList.Add(skate);
         skate.gameObject.AddComponent<CollectedSkate>();
-
-        //skate.DORotate(new Vector3(90, 0, 0), 0.25f).SetLoops(4, LoopType.Incremental);
 
         if (!skate.gameObject.TryGetComponent<Rigidbody>(out Rigidbody addedRigidbody))
         {

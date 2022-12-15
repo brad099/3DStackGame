@@ -9,8 +9,8 @@ public class Money : MonoBehaviour
     {
         if (other.CompareTag("Cyber"))
         {
-             other.transform.DOScale(26f, 0.3f).OnComplete(() =>{
-             other.transform.DOScale(25f, 0.3f);});
+             other.transform.DOScale(2.5f, 0.3f).OnComplete(() =>{
+             other.transform.DOScale(2.4f, 0.3f);});
         }
     }
 }

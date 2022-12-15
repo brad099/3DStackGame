@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _direction;
     private Transform _transform;
     private bool _isMoving = true;
+    private float count = 0;
 
     void Start()
     {
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         //Change to Spray
         if (other.transform.CompareTag("Spray"))
         {
+            DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(true);
             Graffiti.gameObject.SetActive(false);
@@ -73,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
         //Change to Graffiti
         if (other.transform.CompareTag("Graffiti"))
         {
+            DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);
             Graffiti.gameObject.SetActive(true);
@@ -87,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
         //Change to Neon
         if (other.transform.CompareTag("Neon"))
         {
+            DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);
             Graffiti.gameObject.SetActive(false);
@@ -101,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
         //Change to Fly
         if (other.transform.CompareTag("Fly"))
         {
+            DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);
             Graffiti.gameObject.SetActive(false);
@@ -118,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.transform.CompareTag("Collectable"))
         {
             EventHolder.Instance.SkateCollided(other.transform);
+            DamageNum.Instance.ShowNumber(other.gameObject.GetComponent<CollectedSkate>()._SkatePrice, transform);
         } 
     }
 }

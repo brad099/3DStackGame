@@ -2,45 +2,48 @@ using UnityEngine;
 using DG.Tweening;
 public class CollectedSkate : MonoBehaviour
 {
-        [SerializeField] GameObject Simple;
-        [SerializeField] Animator _anim;
-        [SerializeField] GameObject Spray;  
-        [SerializeField] GameObject Graffiti;
-        [SerializeField] GameObject Neon;
-        [SerializeField] GameObject Fly;
-        private Sequence _sequence;
+    [SerializeField] GameObject Simple;
+    [SerializeField] Animator _anim;
+    [SerializeField] GameObject Spray;
+    [SerializeField] GameObject Graffiti;
+    [SerializeField] GameObject Neon;
+    [SerializeField] GameObject Fly;
+    public int _SkatePrice = 3;
 
-        void Start()
-        {
+    private Sequence _sequence;
+
+    void Start()
+    {
         _anim = transform.GetComponent<Animator>();
         Simple = this.gameObject.transform.transform.GetChild(0).gameObject;
         Spray = this.gameObject.transform.transform.GetChild(1).gameObject;
         Graffiti = this.gameObject.transform.transform.GetChild(2).gameObject;
         Neon = this.gameObject.transform.transform.GetChild(3).gameObject;
         Fly = this.gameObject.transform.transform.GetChild(4).gameObject;
-        }
+    }
 
-
-        void Update()
-        {
-            _anim.SetFloat ("TurnFloat",Input.GetAxis("Horizontal"));
-            Mathf.Clamp(transform.rotation.z,-25,25);
-
-            // Quaternion rot = transform.localRotation;
-            // transform.localRotation = rot;
-            // rot.y = Mathf.Clamp(transform.eulerAngles.y, -10, 10);
-        }
+    void Update()
+    {
+        _anim.SetFloat("TurnFloat", Input.GetAxis("Horizontal"));
+        Mathf.Clamp(transform.rotation.z, -25, 25);
+    }
     void OnCollisionEnter(Collision other)
     {
+        //Collectable
         if (other.transform.CompareTag("Collectable"))
         {
             EventHolder.Instance.SkateCollided(other.transform);
-        } 
+            if(other.gameObject.layer!=6){
+                DamageNum.Instance.ShowNumber(_SkatePrice, transform);
+            }
+        }
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
-         if (other.CompareTag("Obstacle"))
+
+        //Enemy Obstacle
+        if (other.CompareTag("Obstacle"))
         {
             EventHolder.Instance.ObstacleCollided(transform);
             Debug.Log("Colliding To Enemy");
@@ -49,6 +52,8 @@ public class CollectedSkate : MonoBehaviour
         //Change to Spray
         if (other.transform.CompareTag("Spray"))
         {
+            _SkatePrice += 5;
+            DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(true);
             Graffiti.gameObject.SetActive(false);
@@ -63,6 +68,8 @@ public class CollectedSkate : MonoBehaviour
         //Change to Graffiti
         if (other.transform.CompareTag("Graffiti"))
         {
+            _SkatePrice += 5;
+            DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);
             Graffiti.gameObject.SetActive(true);
@@ -77,6 +84,8 @@ public class CollectedSkate : MonoBehaviour
         //Change to Neon
         if (other.transform.CompareTag("Neon"))
         {
+            _SkatePrice += 5;
+            DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);
             Graffiti.gameObject.SetActive(false);
@@ -91,6 +100,8 @@ public class CollectedSkate : MonoBehaviour
         //Change to Fly
         if (other.transform.CompareTag("Fly"))
         {
+            _SkatePrice += 5;
+            DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);
             Graffiti.gameObject.SetActive(false);
@@ -100,6 +111,6 @@ public class CollectedSkate : MonoBehaviour
             _sequence.Join(transform.DOScale(1.3f, 0.1f));
             _sequence.AppendInterval(0.05f);
             _sequence.Join(transform.DOScale(1f, 0.1f));
-        } 
+        }
     }
 }

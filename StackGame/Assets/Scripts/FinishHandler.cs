@@ -7,10 +7,9 @@ using System.Collections.Generic;
 public class FinishHandler : MonoBehaviour
 {
     [SerializeField] private List<Transform> skatePlaces;
-    [SerializeField] private float _finalMoneyAmount;
     [SerializeField] private GameObject _finalMoney;
-    private SkateCollector _skateCollector;
     private int _placeCount = 0;
+    private SkateCollector _skateCollector;
 
     void OnEnable()
     {
@@ -22,7 +21,7 @@ public class FinishHandler : MonoBehaviour
     {
         StartCoroutine(StartAnimation());
         _skateCollector.IsFinished=false;
-        _finalMoney.transform.DOMoveY((float)(_finalMoney.transform.position.y + (_finalMoneyAmount * 0.02f)), 1f);
+        
     }
 
     IEnumerator StartAnimation()
@@ -52,7 +51,8 @@ public class FinishHandler : MonoBehaviour
                 skate.DOLocalJump(Vector3.zero, 0.05f, 1, .2f);
                 _placeCount++;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
         }
+        _finalMoney.transform.DOMoveY((float)(_finalMoney.transform.position.y + (DamageNum.Instance.TotalMoney * 0.03f)), 1f);
     }
 }
