@@ -10,11 +10,13 @@ public class FinishHandler : MonoBehaviour
     [SerializeField] private GameObject _finalMoney;
     private int _placeCount = 0;
     private SkateCollector _skateCollector;
+    private TagPriceHandler _tagPrice;
 
     void OnEnable()
     {
         EventHolder.Instance.OnFinishCollider += FinishAnimationHandler;
         _skateCollector = FindObjectOfType<SkateCollector>();
+        _tagPrice = FindObjectOfType<TagPriceHandler>();
     }
 
     private void FinishAnimationHandler()
@@ -53,6 +55,6 @@ public class FinishHandler : MonoBehaviour
             }
             yield return new WaitForSeconds(0.3f);
         }
-        _finalMoney.transform.DOMoveY((float)(_finalMoney.transform.position.y + (DamageNum.Instance.TotalMoney * 0.03f)), 1f);
+        _finalMoney.transform.DOMoveY((float)(_finalMoney.transform.position.y + (_tagPrice.GetMoney() * 0.1f)), 1f);
     }
 }

@@ -18,7 +18,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 1
+    resampleCurves: 0
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
@@ -28,9 +28,9 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
+    importAnimatedCustomProperties: 1
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -50,8 +50,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -80,7 +80,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -96,7 +96,7 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -144,7 +144,52 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: laser_anim(Clone)
+      parentName: 
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Bone
+      parentName: laser_anim(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.001
+      parentName: Bone
+      position: {x: -0, y: 0.0019527458, z: 0}
+      rotation: {x: 0.24151039, y: -0.00000011568045, z: -0.000000028790282, w: 0.97039825}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone.002
+      parentName: Bone.001
+      position: {x: 7.062184e-17, y: 0.004939141, z: 1.4901161e-10}
+      rotation: {x: -0.47183093, y: -3.552714e-14, z: 0.00000011249325, w: 0.8816891}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Bone.003
+      parentName: Bone.002
+      position: {x: 2.399248e-17, y: 0.008712272, z: -4.6566126e-11}
+      rotation: {x: 0.47332054, y: -2.0039207e-14, z: -0.0000001128484, w: 0.8808903}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: Bone.004
+      parentName: Bone.003
+      position: {x: -1.0701384e-16, y: 0.012074668, z: -5.9604643e-10}
+      rotation: {x: 0.5605072, y: 0.42621958, z: -0.42978808, w: 0.5651998}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: Bone.005
+      parentName: Bone.004
+      position: {x: -1.0701384e-16, y: 0.0073911413, z: 5.9604643e-10}
+      rotation: {x: -0.3628724, y: 0.16579248, z: -0.036072455, w: 0.91626155}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
+    - name: Cylinder.008
+      parentName: Bone.005
+      position: {x: 0.001510247, y: 0.015205728, z: 0.016298618}
+      rotation: {x: 0.7510926, y: 0.04714073, z: -0.04385009, w: 0.6570501}
+      scale: {x: 0.6465515, y: 0.6465514, z: 0.64655143}
+    - name: Bone.005_end
+      parentName: Bone.005
+      position: {x: -0, y: 0.0045239036, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

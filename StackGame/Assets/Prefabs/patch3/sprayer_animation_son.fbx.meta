@@ -9,6 +9,12 @@ ModelImporter:
   - first:
       74: -13000188012105478
     second: Armature|Armature|Armature|Armature|Armature|ArmatureAction.003
+  - first:
+      74: -5964696389003507037
+    second: Armature|Armature|Armature|Armature|Armature|Armature|Armature|Armat
+  - first:
+      74: -6066934990384904412
+    second: Armature|Armature|Armature|Armature|Armature|Armature|Armature|ArmatureA
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -39,8 +45,8 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Armature|Armature|Armature|Armature|ArmatureAction.001
-      takeName: Armature|Armature|Armature|Armature|Armature|ArmatureAction.001
+      name: Armature|Armature|Armature|Armature|Armature|Armature|Armature|Armat
+      takeName: Armature|Armature|Armature|Armature|Armature|Armature|Armature|Armat
       internalID: 0
       firstFrame: 0
       lastFrame: 168
@@ -68,8 +74,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|Armature|Armature|Armature|Armature|ArmatureAction.003
-      takeName: Armature|Armature|Armature|Armature|Armature|ArmatureAction.003
+      name: Armature|Armature|Armature|Armature|Armature|Armature|Armature|ArmatureA
+      takeName: Armature|Armature|Armature|Armature|Armature|Armature|Armature|ArmatureA
       internalID: 0
       firstFrame: 0
       lastFrame: 168

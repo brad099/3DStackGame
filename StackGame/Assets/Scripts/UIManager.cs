@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
 
     [Header("General Panel")]
     [SerializeField] GameObject GeneralPanel;
+    [SerializeField] GameObject LoadPanel;
 
     [Header("Home Panel")]
     [SerializeField] GameObject HomePanel;
@@ -53,6 +55,8 @@ public class UIManager : MonoBehaviour
     public float minDuration;
     public Ease easemode;
     public float maxDuration;
+    [SerializeField] GameObject _playerSpeed;
+    [SerializeField] TMP_Text TapToPlay;
 
 
 
@@ -73,6 +77,8 @@ public class UIManager : MonoBehaviour
         // Getting Values on the Beginning
         GemAmount = PlayerPrefs.GetInt("gem");
         Gem_Amount.text  = "" + PlayerPrefs.GetInt("gem");
+        // _playerSpeed = FindObjectOfType<PlayerMovement>().verticalSpeed;
+        _playerSpeed.GetComponent<PlayerMovement>().speedMultiplier = 0f;
     }
 
     private void FlyingCoins()
@@ -90,6 +96,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         OpenHomePanel();
+        TapToPlay.transform.DOScale(1.4f, 0.6f);
+        StartCoroutine(WaitandStart(4f));
     }
     private void Update()
     {
@@ -135,21 +143,18 @@ public class UIManager : MonoBehaviour
     {
         SettingsPanel.SetActive(true);
         SettingsUIPanel.SetActive(true);
-        SettingsUIPanel.transform.localScale = Vector3.zero;
-        Image panelImg = SettingsPanel.GetComponent<Image>();
-        panelImg.color = new Color(0, 0, 0, 0);
-        DOTween.To(() => panelImg.color, x => panelImg.color = x, new Color32(32, 32, 32, 180), 0.2f);
-        SettingsUIPanel.transform.DOScale(0.7f, 0.2f);
+        //SettingsUIPanel.transform.localScale = Vector3.zero;
+        //Image panelImg = SettingsPanel.GetComponent<Image>();
+        //panelImg.color = new Color(0, 0, 0, 0);
+        //DOTween.To(() => panelImg.color, x => panelImg.color = x, new Color32(32, 32, 32, 180), 0.2f);
+        //SettingsUIPanel.transform.DOScale(0.7f, 0.2f);
     }
     public void CloseSettingsPanel()
     {
-        Image panelImg = SettingsPanel.GetComponent<Image>();
-        DOTween.To(() => panelImg.color, x => panelImg.color = x, new Color32(32, 32, 32, 0), 0.2f);
-        SettingsUIPanel.transform.DOScale(0f, 0.2f).OnComplete(() =>
-        {
-            SettingsPanel.SetActive(false);
-            SettingsUIPanel.SetActive(false);
-        });
+        //Image panelImg = SettingsPanel.GetComponent<Image>();
+        //DOTween.To(() => panelImg.color, x => panelImg.color = x, new Color32(32, 32, 32, 0), 0.2f);
+        SettingsPanel.SetActive(false);
+        SettingsUIPanel.SetActive(false);
     }
 
 
@@ -322,5 +327,18 @@ public class UIManager : MonoBehaviour
             ShopPanel.SetActive(false);
             ShopUIPanel.SetActive(false);
         });
+    }
+
+    IEnumerator WaitandStart(float time)
+    {
+        yield return new WaitForSeconds(time);
+        LoadPanel.SetActive(false);
+        
+
+    }
+    public void TapToPlayButton()
+    {
+        _playerSpeed.GetComponent<PlayerMovement>().speedMultiplier = 10f;
+        TapToPlay.enabled=false;
     }
 }

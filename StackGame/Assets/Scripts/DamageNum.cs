@@ -18,26 +18,26 @@ public class DamageNum : MonoBehaviour
             Instance = this;
     }
 
-    
+
     public void ShowNumber(float numberMultpl, Transform _transform)
     {
 
-        float NewnumberMultipl = numberMultpl;
-        _newnumberMultipl = NewnumberMultipl;
-        _totalMoney += NewnumberMultipl;
-        DamageNumber damageNumber = numberPrefab.Spawn(_transform.position, _newnumberMultipl);
-        _money.text = System.Convert.ToInt32(_totalMoney).ToString();
+        //float NewnumberMultipl = numberMultpl;
+        //_newnumberMultipl = NewnumberMultipl;
+        //_totalMoney += NewnumberMultipl;
+        DamageNumber damageNumber = numberPrefab.Spawn(_transform.position, _transform.GetComponent<PriceModel>().Price);
+        //_money.text = System.Convert.ToInt32(_totalMoney).ToString();
     }
 
     public void ShowNumberDecrease(Transform _transform)
     {
-        float NewnumberMultipl = _transform.GetComponent<CollectedSkate>()._SkatePrice;
-        _totalMoney -= NewnumberMultipl;
-        DamageNumber damageNumber = numberPrefabDecrease.Spawn(_transform.position, NewnumberMultipl);
-        if (_totalMoney < 0)
-            _totalMoney = 0;
-        else
-            _money.text = System.Convert.ToInt32(_totalMoney).ToString();
+        //float NewnumberMultipl = _transform.GetComponent<CollectedSkate>()._SkatePrice;
+        //_totalMoney -= NewnumberMultipl;
+        DamageNumber damageNumber = numberPrefabDecrease.Spawn(_transform.position, _transform.GetComponent<PriceModel>().Price);
+        //if (_totalMoney < 0)
+        //    _totalMoney = 0;
+        //else
+        //    _money.text = System.Convert.ToInt32(_totalMoney).ToString();
 
     }
 }

@@ -27,7 +27,8 @@ public class SoundManager : MonoBehaviour
     }
 
     private void Start() {
-        Play("BackgroundMusic", true);
+        Play("Background", true);
+        Play("Skate",true);
     }
 
     public void Play(string name, bool loopPlay) {

@@ -28,6 +28,13 @@ public class EventHolder : MonoBehaviour
     public Action<Transform> OnObstacleCollided;
     public Action<Transform> OnSellSkate;
 
+    public Action OnPriceChange;
+
+    public void PriceChangeEvent()
+    {
+        OnPriceChange?.Invoke();
+    }
+
     public void SkateCollided(Transform skate)
     {
         OnSkateCollided?.Invoke(skate);

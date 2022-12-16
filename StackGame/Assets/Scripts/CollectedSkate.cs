@@ -1,5 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.EventSystems;
+using CASP.SoundManager;
 public class CollectedSkate : MonoBehaviour
 {
     [SerializeField] GameObject Simple;
@@ -8,18 +10,20 @@ public class CollectedSkate : MonoBehaviour
     [SerializeField] GameObject Graffiti;
     [SerializeField] GameObject Neon;
     [SerializeField] GameObject Fly;
-    public int _SkatePrice = 3;
-
+    
     private Sequence _sequence;
 
+    public PriceModel price;
     void Start()
     {
+        price = GetComponent<PriceModel>();
         _anim = transform.GetComponent<Animator>();
         Simple = this.gameObject.transform.transform.GetChild(0).gameObject;
         Spray = this.gameObject.transform.transform.GetChild(1).gameObject;
         Graffiti = this.gameObject.transform.transform.GetChild(2).gameObject;
         Neon = this.gameObject.transform.transform.GetChild(3).gameObject;
         Fly = this.gameObject.transform.transform.GetChild(4).gameObject;
+        // SoundManager.instance.Play("Background",true);
     }
 
     void Update()
@@ -33,9 +37,8 @@ public class CollectedSkate : MonoBehaviour
         if (other.transform.CompareTag("Collectable"))
         {
             EventHolder.Instance.SkateCollided(other.transform);
-            if(other.gameObject.layer!=6){
-                DamageNum.Instance.ShowNumber(_SkatePrice, transform);
-            }
+            EventHolder.Instance.PriceChangeEvent();
+            
         }
     }
 
@@ -45,14 +48,18 @@ public class CollectedSkate : MonoBehaviour
         //Enemy Obstacle
         if (other.CompareTag("Obstacle"))
         {
+
             EventHolder.Instance.ObstacleCollided(transform);
+            EventHolder.Instance.OnPriceChange();
             Debug.Log("Colliding To Enemy");
         }
 
         //Change to Spray
         if (other.transform.CompareTag("Spray"))
         {
-            _SkatePrice += 5;
+            SoundManager.instance.Play("Down",true);
+            price.Price += 5;
+            EventHolder.Instance.OnPriceChange();
             DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(true);
@@ -68,7 +75,8 @@ public class CollectedSkate : MonoBehaviour
         //Change to Graffiti
         if (other.transform.CompareTag("Graffiti"))
         {
-            _SkatePrice += 5;
+            price.Price += 5;
+            EventHolder.Instance.OnPriceChange();
             DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);
@@ -84,7 +92,8 @@ public class CollectedSkate : MonoBehaviour
         //Change to Neon
         if (other.transform.CompareTag("Neon"))
         {
-            _SkatePrice += 5;
+            price.Price += 5;
+            EventHolder.Instance.OnPriceChange();
             DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);
@@ -100,7 +109,8 @@ public class CollectedSkate : MonoBehaviour
         //Change to Fly
         if (other.transform.CompareTag("Fly"))
         {
-            _SkatePrice += 5;
+            price.Price += 5;
+            EventHolder.Instance.OnPriceChange();
             DamageNum.Instance.ShowNumber(5, transform);
             Simple.gameObject.SetActive(false);
             Spray.gameObject.SetActive(false);

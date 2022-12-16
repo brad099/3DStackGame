@@ -2,22 +2,22 @@ using UnityEngine;
 using DG.Tweening;
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float verticalSpeed;
-    [SerializeField] private float speedMultiplier;
+    [SerializeField] public float verticalSpeed;
+    [SerializeField] public float speedMultiplier;
     [SerializeField] GameObject Simple;
-    [SerializeField] GameObject Spray;  
+    [SerializeField] GameObject Spray;
     [SerializeField] GameObject Graffiti;
     [SerializeField] GameObject Neon;
     [SerializeField] GameObject Fly;
     [SerializeField] Animator _anim;
+    private Touch touch;
     private Rigidbody _rb;
-
     private Sequence _sequence;
     private Vector3 _direction;
     private Transform _transform;
     private bool _isMoving = true;
     private float count = 0;
-
+    public float SmoothSpeed = 0.01f;
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -30,23 +30,35 @@ public class PlayerMovement : MonoBehaviour
         Neon = this.gameObject.transform.GetChild(0).transform.GetChild(3).gameObject;
         Fly = this.gameObject.transform.GetChild(0).transform.GetChild(4).gameObject;
     }
-
+     void Update()
+     {
+        Mathf.Clamp(transform.rotation.z, -25, 25);
+     }
+    //     transform.position += Vector3.forward * verticalSpeed * Time.deltaTime;
+    //     if (Input.touchCount > 0)
+    //     {
+    //         touch = Input.GetTouch(0);
+    //         if (touch.phase == TouchPhase.Moved)
+    //         {
+    //             transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * SmoothSpeed * Time.deltaTime, transform.position.y, transform.position.z);
+    //             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -2.6f, 2.6f), transform.position.y, transform.position.z);
+    //         }
+    //     }
+    // 
     void FixedUpdate()
     {
-        if (_isMoving) Movement();
-        Mathf.Clamp(transform.rotation.z,-15,15);
+         if (_isMoving) Movement();
+         
     }
 
     private void Movement()
     {
         _direction = new Vector3(Input.GetAxis("Horizontal") * speedMultiplier, 0, verticalSpeed) * Time.fixedDeltaTime;
         _transform.Translate(_direction.x, 0, _direction.z);
-        _anim.SetFloat ("TurnFloat",Input.GetAxis("Horizontal"));
+        _anim.SetFloat("TurnFloat", Input.GetAxis("Horizontal"));
         var localPosition = _transform.localPosition;
-        localPosition = new Vector3(Mathf.Clamp(localPosition.x, -3f, 3f), localPosition.y, localPosition.z);
-        Quaternion rot = transform.localRotation;
-        transform.localRotation = rot;
-        rot.y = Mathf.Clamp(transform.eulerAngles.y, -10, 10);
+        localPosition = new Vector3(Mathf.Clamp(localPosition.x, -2.6f, 2.6f), localPosition.y, localPosition.z);
+        Mathf.Clamp(transform.rotation.z,-15,15);
         _transform.localPosition = localPosition;
     }
 
@@ -123,7 +135,96 @@ public class PlayerMovement : MonoBehaviour
         if (other.transform.CompareTag("Collectable"))
         {
             EventHolder.Instance.SkateCollided(other.transform);
-            DamageNum.Instance.ShowNumber(other.gameObject.GetComponent<CollectedSkate>()._SkatePrice, transform);
-        } 
+            DamageNum.Instance.ShowNumber(other.transform.GetComponent<PriceModel>().Price, transform);
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// public static PlayerMovement Instance;
+//     [SerializeField] float Horizontal;
+//     private float horizontal = 1;
+//     [Range(0f, 50)]
+//     
+//     [SerializeField] float SpeedMultiplier;
+
+//     private void Awake()
+//     {
+//         if (Instance == null)
+//         {
+//             Instance = this;
+//         }
+//     }
+//     private void OnEnable()
+//     {
+//         EventHolder.Instance.OnFinishLineEvent += FinishLineEvent;
+//     }
+
+//     private void FinishLineEvent(GameObject obj)
+//     {
+//         CameraManager.instance.OpenCamera("CM_FinishCamera", 1.5f, CameraEaseStates.Linear);
+//         horizontal = 0;
+//         if (obj.transform.name != "Player")
+//         {
+//             if (transform.position.x != 0)
+//             {
+//                 transform.DOMoveX(0, .5f);
+
+//             }
+//         }
+
+
+//     }
+
+//     void Start()
+//     {
+//         var pizza = transform;
+//         pizza.tag = "Collected";
+//         pizza.gameObject.AddComponent<PizzaCollected>();
+//         pizza.gameObject.AddComponent<PizzaPrice>();
+//         pizza.gameObject.GetComponent<PizzaPrice>().Price = 1;
+//         PizzaStackHolder.Instance.Pizzas.Add(pizza);
+//         MoneyCounter.Instance.UpdateMoney();
+//     }
+
+
+// void Update()
+// {
+//     transform.position += Vector3.forward * VerticalSpeed * Time.deltaTime;
+
+
+//     if (Input.touchCount > 0)
+//     {
+//         touch = Input.GetTouch(0);
+//         if (touch.phase == TouchPhase.Moved)
+//         {
+//             transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * speed, -1.2f, transform.position.z);       
+//             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -6f, 5.3f), transform.position.y, transform.position.z);
+
+//         }
+//     }
+
+//    // Horizontal = Input.GetAxis("Horizontal");
+//    // Horizontal = Horizontal * horizontal;
+//    //transform.position += new Vector3(transform.position.x, 0, VerticalSpeed) * SpeedMultiplier * Time.deltaTime;
+//    // transform.position = new Vector3(Mathf.Clamp(transform.position.x, -8f, 9.3f), transform.position.y, transform.position.z);
+
+// }
+
+// //    private void OnTriggerEnter(Collider other)
+// //    {
+// //        if (other.CompareTag("Collectable"))
+// //        {
+// //            EventHolder.Instance.PizzaCollected(other.gameObject);
+// //        }
+// //    }
